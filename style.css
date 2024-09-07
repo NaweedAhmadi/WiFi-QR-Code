@@ -117,7 +117,7 @@ body {
     margin-bottom: 0;
 }
 
-.qrCodeDiv img {
+#exampleImage {
     opacity: 0.33;
     width: 20rem;
     height: 20rem;

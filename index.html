@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wi-Fi QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://kit.fontawesome.com/d61f8af839.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,11 +19,11 @@
                 <p class="inputDivTitle">Your Network Details:</p>
                 <div class="wifiName">
                     <label for="wifi-name"><i class="fa-solid fa-wifi"></i> Wi-Fi Network Name (ID):</label>
-                    <input type="text" name="wifi-name" id="wifi-name">
+                    <input type="text" name="wifiName" id="wifiName">
                 </div>
                 <div class="wifi-input">
                     <label for="wifiPass"><i class="fa-solid fa-key"></i> Wi-Fi Password:</label>
-                    <input type="text" name="wifi-pass" id="wifi-pass">
+                    <input type="text" name="wifiPass" id="wifiPass">
                 </div>
 
                 <hr>
@@ -37,18 +38,18 @@
                         <p class="wifiTypeTitle"><i class="fa-solid fa-gear"></i> Wi-Fi Type:</p>
                         <div class="wifiType">
                             <div>
-                                <input type="radio" name="wifiType" id="wpa" checked>
+                                <input type="radio" name="encryption" id="wpa" value="WPA" checked>
                                 <label for="wpa">WPA</label>
                             </div>
                             <div>
-                                <input type="radio" name="wifiType" id="wep">
+                                <input type="radio" name="encryption" id="wep" value="WEP">
                                 <label for="wep">WEP</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="qrcodebtn"><button>Generate Wi-Fi QR Code</button></div>
+                <div id="qrcodebtn" onclick="generateQRCode()"><button>Generate Wi-Fi QR Code</button></div>
             </div>
         </div>
 
@@ -57,9 +58,10 @@
                 <p>Your Wi-Fi QR Code</p>
 
                 <div>
-                    <img src="example.png" alt="Example QR Code">
+                    <div id="qrCodeImage"><img id="exampleImage" src="example.png" alt="Example QR Code"></div>
+                    
                     <div id="downloadbtn">
-                        <button disabled><i class="fa-solid fa-download"></i> Download Wi-Fi QR Code</button>
+                        <button id="downloadQRCode" disabled><i class="fa-solid fa-download"></i> Download Wi-Fi QR Code</button>
                     </div>
                 </div>
 
@@ -67,6 +69,67 @@
         </div>
 
     </div>
+
+    <script>
+        function generateQRCode() {
+            // Get Wi-Fi details from the inputs
+            var wifiName = document.getElementById("wifiName").value;
+            var wifiPass = document.getElementById("wifiPass").value;
+            var encryption = document.querySelector('input[name="encryption"]:checked').value;
+
+            // Format the Wi-Fi credentials
+            var wifiString = `WIFI:S:${wifiName};T:${encryption};P:${wifiPass};;`;
+
+            var qrCodeImage = document.getElementById("qrCodeImage");
+            qrCodeImage.innerHTML = ""; // Clear any previous QR code
+
+            // Generate the QR code
+            var qrcode = new QRCode(qrCodeImage, {
+                text: wifiString,
+                width: 256,
+                height: 256,
+            });
+
+            // Add padding after QR code is generated
+            setTimeout(function () {
+                // Access the generated canvas element
+                var canvas = qrCodeImage.querySelector("canvas");
+                if (canvas) {
+                    // Create a new canvas with padding
+                    var paddedCanvas = document.createElement("canvas");
+                    var padding = 30; // 30px padding
+
+                    // Set the size of the new canvas (original size + padding)
+                    paddedCanvas.width = canvas.width + padding * 2;
+                    paddedCanvas.height = canvas.height + padding * 2;
+
+                    var ctx = paddedCanvas.getContext("2d");
+
+                    // Fill with a white background
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
+
+                    // Draw the original QR code onto the new canvas with padding
+                    ctx.drawImage(canvas, padding, padding);
+
+                    // Replace the original canvas with the padded canvas
+                    qrCodeImage.innerHTML = ""; // Clear the div
+                    qrCodeImage.appendChild(paddedCanvas);
+
+                    // Enable the download button and add download functionality
+                    var downloadButton = document.getElementById("downloadQRCode");
+                    downloadButton.disabled = false;
+                    downloadButton.onclick = function () {
+                        var dataUrl = paddedCanvas.toDataURL("image/png");
+                        var link = document.createElement('a');
+                        link.href = dataUrl;
+                        link.download = 'wifi-qrcode.png';
+                        link.click();
+                    };
+                }
+            }, 10); // Small delay to ensure the QR code is generated
+        }
+    </script>
     
 </body>
 </html>
