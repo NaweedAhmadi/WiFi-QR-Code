@@ -19,22 +19,21 @@
                 <p class="inputDivTitle">Your Network Details:</p>
                 <div class="wifiName">
                     <label for="wifi-name"><i class="fa-solid fa-wifi"></i> Wi-Fi Network Name (ID):</label>
-                    <input type="text" name="wifiName" id="wifiName">
+                    <input type="text" name="wifiName" id="wifiName" required>
                 </div>
                 <div class="wifi-input">
                     <label for="wifiPass"><i class="fa-solid fa-key"></i> Wi-Fi Password:</label>
-                    <input type="text" name="wifiPass" id="wifiPass">
+                    <input type="text" name="wifiPass" id="wifiPass" required>
                 </div>
 
                 <hr>
 
                 <div>
                     <div id="settingbtn">
-                        <button>Show advanced settings <i class="fa-solid fa-angle-down"></i></button>
+                        <button id="toggleSettingsBtn">Show advanced settings <i class="fa-solid fa-angle-down"></i></button>
                     </div>
-
-                    <!-- <i class="fa-solid fa-angle-up"></i> -->
-                    <div>
+                
+                    <div id="wifiTypeSection">
                         <p class="wifiTypeTitle"><i class="fa-solid fa-gear"></i> Wi-Fi Type:</p>
                         <div class="wifiType">
                             <div>
@@ -47,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
 
                 <div id="qrcodebtn" onclick="generateQRCode()"><button>Generate Wi-Fi QR Code</button></div>
             </div>
@@ -71,6 +70,20 @@
     </div>
 
     <script>
+        // document.getElementById('toggleSettingsBtn').addEventListener('click', function () {
+        //     var wifiTypeSection = document.getElementById('wifiTypeSection');
+        //     var toggleBtn = document.getElementById('toggleSettingsBtn');
+
+        //     // Toggle visibility
+        //     if (wifiTypeSection.style.display === "none") {
+        //         wifiTypeSection.style.display = "block";
+        //         toggleBtn.innerHTML = 'Show advanced settings <i class="fa-solid fa-angle-up"></i>';
+        //     } else {
+        //         wifiTypeSection.style.display = "none";
+        //         toggleBtn.innerHTML = 'Show advanced settings <i class="fa-solid fa-angle-down"></i>';
+        //     }
+        // });
+        
         function generateQRCode() {
             // Get Wi-Fi details from the inputs
             var wifiName = document.getElementById("wifiName").value;
@@ -86,8 +99,8 @@
             // Generate the QR code
             var qrcode = new QRCode(qrCodeImage, {
                 text: wifiString,
-                width: 256,
-                height: 256,
+                width: 245,
+                height: 245,
             });
 
             // Add padding after QR code is generated

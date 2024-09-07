@@ -62,6 +62,7 @@ body {
 }
 
 #settingbtn button {
+    margin-top: 7px;
     border: none;
     background-color: #FFF;
     font-size: 14px;
@@ -91,7 +92,7 @@ body {
 }
 
 #qrcodebtn button {
-    margin-top: 32px;
+    margin-top: 27px;
     padding: 8px 12px;
     border: 2px solid rgb(79 70 229);
     border-radius: 5px;
@@ -106,9 +107,9 @@ body {
 }
 
 .qrCodeDiv {
-    padding: 2rem;
+    margin-left: 0.5rem;
+    padding: 36px 48px 40px;
     box-sizing: border-box;
-    margin-left: 0.5rem; 
 }
 
 .qrCodeDiv p {
@@ -119,8 +120,8 @@ body {
 
 #exampleImage {
     opacity: 0.33;
-    width: 20rem;
-    height: 20rem;
+    width: 305px;
+    height: 305px;
 }
 
 #downloadbtn {
@@ -129,7 +130,7 @@ body {
 }
 
 #downloadbtn button {
-    margin-top: 24px;
+    margin-top: 35px;
     padding: 8px 12px;
     border: 2px solid rgb(101 163 13);
     border-radius: 5px;
@@ -147,4 +148,21 @@ hr {
     margin: 25px 0 10px;
     border: none;
     border-top: 1px solid rgb(209 213 219);
+}
+
+@media only screen and (max-width: 800px) {
+    #wrapper {
+        display: block;
+        width: 100%;
+    }
+
+    .inputDiv, .qrCodeDiv {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .qrCodeDiv {
+        margin-left: 0;
+    }
 }
