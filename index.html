@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wi-Fi QR Code Generator</title>
+    <script src="https://kit.fontawesome.com/d61f8af839.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="heading">Wi-Fi QR Code</h1>
+    <div id="description"><p></p>Generate QR codes to help your customers join your Wi-Fi instantly, without typing a password.</div>
+
+    <div id="wrapper">
+
+        <div class="inputDiv">
+            <div>
+                <p class="inputDivTitle">Your Network Details:</p>
+                <div class="wifiName">
+                    <label for="wifi-name"><i class="fa-solid fa-wifi"></i> Wi-Fi Network Name (ID):</label>
+                    <input type="text" name="wifi-name" id="wifi-name">
+                </div>
+                <div class="wifi-input">
+                    <label for="wifiPass"><i class="fa-solid fa-key"></i> Wi-Fi Password:</label>
+                    <input type="text" name="wifi-pass" id="wifi-pass">
+                </div>
+
+                <hr>
+
+                <div>
+                    <div id="settingbtn">
+                        <button>Show advanced settings <i class="fa-solid fa-angle-down"></i></button>
+                    </div>
+
+                    <!-- <i class="fa-solid fa-angle-up"></i> -->
+                    <div>
+                        <p class="wifiTypeTitle"><i class="fa-solid fa-gear"></i> Wi-Fi Type:</p>
+                        <div class="wifiType">
+                            <div>
+                                <input type="radio" name="wifiType" id="wpa" checked>
+                                <label for="wpa">WPA</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="wifiType" id="wep">
+                                <label for="wep">WEP</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="qrcodebtn"><button>Generate Wi-Fi QR Code</button></div>
+            </div>
+        </div>
+
+        <div class="qrCodeDiv">
+            <div>
+                <p>Your Wi-Fi QR Code</p>
+
+                <div>
+                    <img src="example.png" alt="Example QR Code">
+                    <div id="downloadbtn">
+                        <button disabled><i class="fa-solid fa-download"></i> Download Wi-Fi QR Code</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
