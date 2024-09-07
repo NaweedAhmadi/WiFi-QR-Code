@@ -151,9 +151,18 @@ hr {
 }
 
 @media only screen and (max-width: 800px) {
-    #wrapper {
+    body {
+        margin: 0;
+    }
+
+    #description {
         display: block;
         width: 100%;
+    }
+
+    #wrapper {
+        display: block;
+        width: 100%
     }
 
     .inputDiv, .qrCodeDiv {
